@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 #  # install.packages("devtools")
 #  devtools::install_github("ropensci/essurvey")
 
-## ---- echo = FALSE-------------------------------------------------------
+## ------------------------------------------------------------------------
 #  install.packages("essurvey")
 
 ## ---- echo = FALSE, eval = TRUE------------------------------------------
