@@ -1,3 +1,23 @@
+## essurvey 1.0.3.9999
+
+## essurvey 1.0.2
+
+### Minor changes
+
+`show_country_rounds` checks if there are missing values and excludes them.
+
+### Breaking changes
+
+`import_all_cntrounds` and `import_country` returned incorrect countries [#31]
+
+## essurvey 1.0.1
+
+### Minor changes
+
+* `ess_email` is now checked that it is not `""` because it wasn't raising an error before.
+
+* Removes the `round` argument from `import_all_cntrounds` because it was a mistake. It already grabs the rounds internally.
+
 ## essurvey 1.0.1
 
 Minor release
