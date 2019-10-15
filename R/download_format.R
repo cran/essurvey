@@ -5,30 +5,25 @@
 
 # If only wants to download rounds, then name every argument after rounds.
 # If rounds and country are specified, country rounds will be downloaded.
-download_format <- function(rounds, country, ess_email, only_download = FALSE,
-                            output_dir = NULL, format = 'stata') {
+download_format <- function(country,
+                            urls,
+                            ess_email = NULL,
+                            only_download = FALSE,
+                            output_dir = NULL) {
   
-  # Check if the format is either 'stata', 'spss' or 'sas'.
-  format <- match.arg(format, c("stata", "spss", "sas"))
-
   if (is.null(ess_email)) ess_email <- get_email()
   # Check user is valid
   authenticate(ess_email)
   
-  # I check whether we want to download rounds or country
-  # rounds by checking whether the rounds and country args
-  # are both available
-  if (!missing(rounds) && !missing(country)) {
-    urls <- ess_country_url(country, rounds, format = format)
-  } else {
-    urls <- ess_round_url(rounds, format = format)
-  }
-  
   # Extract the ESS prefix with the round number
-  ess_round <- stringr::str_extract(urls, "ESS[:digit:]")
+  ess_round <- string_extract(urls, "ESS[[:digit:]]")
   
   # The saving path is output if download is set to TRUE
   # otherwise tempdir()
+  if (only_download && is.null(output_dir)) {
+    stop("`output_dir` should be a valid directory")
+  }
+
   alt_dir <- ifelse(only_download, output_dir, tempdir())
   
   # create a temporary directory to unzip the files
@@ -40,7 +35,7 @@ download_format <- function(rounds, country, ess_email, only_download = FALSE,
     td <- file.path(alt_dir, ess_round)
   }
 
-  for (directory in td) dir.create(directory, recursive = TRUE)
+  for (dire in td) dir.create(dire, recursive = TRUE, showWarnings = FALSE)
   # Loop throuch each url, round name and specific round folder,
   # download the data and save in the round-specific folder
   mapply(round_downloader, urls, ess_round, td)
@@ -92,7 +87,7 @@ authenticate <- function(ess_email) {
 
 # Function downloads the url after authentification and saves
 # in the which_folder
-round_downloader <- function(each_url, which_round, which_folder) {
+round_downloader <- function(each_url, which_round, which_folder) { # nocov start
   
   # Download the data
   message(paste("Downloading", which_round))
@@ -106,9 +101,9 @@ round_downloader <- function(each_url, which_round, which_folder) {
   writeBin(httr::content(current_file, as = "raw") , temp_download)
   
   utils::unzip(temp_download, exdir = which_folder)
-}
+} # nocov end
 
 # Safe getter
-safe_GET <- function(url, config = list(), ...) {
+safe_GET <- function(url, config = list(), ...) { # nocov start
   httr::stop_for_status(httr::GET(url = url, config = config, ...))
-}
+} # nocov end

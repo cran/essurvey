@@ -30,10 +30,8 @@
 #' 
 show_rounds_country <- function(rounds, participate = TRUE) {
   
-  if (!all(rounds %in% show_rounds())) {
-    stop("Rounds not available in ESS. Check show_rounds()")
-  }
-  
+  check_rounds(rounds)
+
   # Obtain the country list with years that participated
   module_list <- table_to_list(.global_vars$ess_website,
                                .global_vars$country_index)
@@ -66,7 +64,7 @@ show_rounds_country <- function(rounds, participate = TRUE) {
 #' @param country A character of length 1 with the full name of the country.
 #'  Use \code{\link{show_countries}}for a list of available countries.
 #'
-#' @return character vector with available rounds for \code{country}
+#' @return numeric vector with available rounds for \code{country}
 #' @export
 #'
 #' @examples
@@ -78,9 +76,7 @@ show_rounds_country <- function(rounds, participate = TRUE) {
 show_country_rounds <- function(country) {
 
   # Check if country is present
-  if (!country %in% show_countries()) {
-    stop("Country not available in ESS. Check show_countries()")
-  }
+  check_country(country)
   
   show_any_rounds(country, .global_vars$country_index)
   
@@ -97,7 +93,7 @@ show_country_rounds <- function(country) {
 #' @param theme A character of length 1 with the full name of the theme.
 #'  Use \code{\link{show_themes}}for a list of available themes.
 #'
-#' @return character vector with available rounds for \code{country}
+#' @return numeric vector with available rounds for \code{country}
 #' @export
 #'
 #' @examples
@@ -112,10 +108,7 @@ show_country_rounds <- function(country) {
 #' 
 show_theme_rounds <- function(theme) {
   
-  # Check if country is present
-  if (!theme %in% show_themes()) {
-    stop("Theme not available in ESS. Check show_themes()")
-  }
+  check_theme(theme)
   
   show_any_rounds(theme, .global_vars$theme_index)
 }
@@ -143,7 +136,7 @@ show_any_rounds <- function(module, module_index) {
 # and scrapes the table from the index and returns a list
 # where every slot is a country and contains a logical
 # for which rounds are available for every country
-table_to_list <- function(ess_website, module_index) {
+table_to_list <- function(ess_website, module_index) { # nocov start
   download_page <- safe_GET(paste0(ess_website, module_index))
   
   # Extract the table in xml format
@@ -182,4 +175,4 @@ table_to_list <- function(ess_website, module_index) {
   list_rounds <- lapply(list_rounds, as.logical)
   
   list_rounds
-}
+} # nocov end

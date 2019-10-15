@@ -4,6 +4,8 @@
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/essurvey)](https://cran.r-project.org/package=essurvey)
 [![Travis-CI Build
 Status](https://travis-ci.org/ropensci/essurvey.svg?branch=master)](https://travis-ci.org/ropensci/essurvey)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/ropensci/essurvey?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/essurvey)
 [![Coverage
 status](https://codecov.io/gh/ropensci/essurvey/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/essurvey?branch=master)
 [![rOpensci\_Badge](https://badges.ropensci.org/201_status.svg)](https://github.com/ropensci/onboarding/issues/201)
@@ -14,12 +16,12 @@ The European Social Survey (ESS) is an academically driven
 cross-national survey that has been conducted across Europe since its
 establishment in 2001. Every two years, face-to-face interviews are
 conducted with newly selected, cross-sectional samples. The survey
-measures the attitudes, beliefs and behaviour patterns of diverse
+measures the attitudes, beliefs and behavior patterns of diverse
 populations in more than thirty nations. Taken from the [ESS
 website](http://www.europeansocialsurvey.org/about/).
 
 Note: The `essurvey` package was originally called `ess`. Since
-`essurvey 1.0.0` all `ess_*` functions have been deprecated in favour of
+`essurvey 1.0.0` all `ess_*` functions have been deprecated in favor of
 the `import_*` and `download_*` functions. Also, versions less than and
 including `essurvey 1.0.1` returned wrong countries. Please install the
 latest CRAN/Github version.
@@ -31,6 +33,24 @@ rounds for a selected country and to show which rounds/countries are
 available. Check out the vignette and other documentation in the
 [package’s website](https://ropensci.github.io/essurvey/) for more
 detailed examples of the `essurvey` package.
+
+## Citation
+
+    #> 
+    #> To cite essurvey in publications use:
+    #> 
+    #>   Cimentada, Jorge (2019). Download Data from the European Social
+    #>   Survey on the Fly R package version 1.0.3
+    #> 
+    #> A BibTeX entry for LaTeX users is
+    #> 
+    #>   @Manual{,
+    #>     title = {Download Data from the European Social Survey on the Fly},
+    #>     author = {Jorge Cimentada},
+    #>     year = {2019},
+    #>     note = {R package version 1.0.3},
+    #>     url = {https://docs.ropensci.org/essurvey/},
+    #>   }
 
 ## Installation
 
@@ -66,20 +86,23 @@ To explore which rounds/countries are present in the ESS use the
 
 ``` r
 library(essurvey)
+#> 
+#> Please cite as:
+#> Cimentada, Jorge (2019). Download Data from the European Social Survey on the Fly R package version 1.0.2.
 show_countries()
 #>  [1] "Albania"            "Austria"            "Belgium"           
 #>  [4] "Bulgaria"           "Croatia"            "Cyprus"            
-#>  [7] "Czech Republic"     "Denmark"            "Estonia"           
+#>  [7] "Czechia"            "Denmark"            "Estonia"           
 #> [10] "Finland"            "France"             "Germany"           
 #> [13] "Greece"             "Hungary"            "Iceland"           
 #> [16] "Ireland"            "Israel"             "Italy"             
 #> [19] "Kosovo"             "Latvia"             "Lithuania"         
-#> [22] "Luxembourg"         "Netherlands"        "Norway"            
-#> [25] "Poland"             "Portugal"           "Romania"           
-#> [28] "Russian Federation" "Serbia"             "Slovakia"          
-#> [31] "Slovenia"           "Spain"              "Sweden"            
-#> [34] "Switzerland"        "Turkey"             "Ukraine"           
-#> [37] "United Kingdom"
+#> [22] "Luxembourg"         "Montenegro"         "Netherlands"       
+#> [25] "Norway"             "Poland"             "Portugal"          
+#> [28] "Romania"            "Russian Federation" "Serbia"            
+#> [31] "Slovakia"           "Slovenia"           "Spain"             
+#> [34] "Sweden"             "Switzerland"        "Turkey"            
+#> [37] "Ukraine"            "United Kingdom"
 ```
 
 To download the first round to use in R:
@@ -118,7 +141,7 @@ supply a non existent round, the function will return an error.
 
 ``` r
 two_rounds <- import_rounds(c(1, 22))
-#> Error in ess_round_url(rounds) : 
+#> Error in round_url(rounds) : 
 #> ESS round 22 is not a available. Check show_rounds() 
 ```
 
@@ -163,8 +186,7 @@ R with the `haven` package for all `essurvey` related functions to work.
 -----
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its
-terms.
+Conduct](https://ropensci.github.io/essurvey/CONDUCT.html). By
+participating in this project you agree to abide by its terms.
 
 [![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

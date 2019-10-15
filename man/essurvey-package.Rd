@@ -20,8 +20,8 @@ at \url{https://ropensci.github.io/essurvey/}
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://docs.ropensci.org/essurvey/}
   \item \url{https://github.com/ropensci/essurvey}
-  \item \url{https://ropensci.github.io/essurvey/}
   \item Report bugs at \url{https://github.com/ropensci/essurvey/issues}
 }
 
@@ -31,8 +31,10 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Thomas Leeper (Thomas reviewed the package for rOpensci,see https://github.com/ropensci/onboarding/issues/201) [NA]
-  \item Nujcharee Haswell (Nujcharee reviewed the package for rOpensci, see https://github.com/ropensci/onboarding/issues/201) [NA]
+  \item Thomas Leeper (Thomas reviewed the package for rOpensci,see https://github.com/ropensci/onboarding/issues/201) [reviewer]
+  \item Nujcharee Haswell (Nujcharee reviewed the package for rOpensci, see https://github.com/ropensci/onboarding/issues/201) [reviewer]
+  \item Jorge Lopez \email{jorge@loperez.com} [contributor]
+  \item François Briatte \email{f.briatte@gmail.com} [contributor]
 }
 
 }

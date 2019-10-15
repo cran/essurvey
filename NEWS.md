@@ -1,10 +1,32 @@
-## essurvey 1.0.3.9999
+## essurvey 1.0.3
+
+### Breaking changes
+
+* If you don't know which format is available for a round/country, `import_*` and `download_*` functions now accept a NULL argument which runs through `'stata'`, `'spss'` and `'sas'` formats automatically. By default, `import_*` functions have now format set to `NULL` to automatically try the three different formats. This breaks backward dependency but only slightly where it had 'stata' set as default.
+
+### New features
+
+* Users can now download SDDF (weight data) for each country/round combination of files. Functions `show_sddf_cntrounds`, `import_sddf_country` and `download_sddf_country` are now introduced. For technical purposes, `show_sddf_cntrounds` needs for the user to have set their registered ESS email with `set_email`. [#9]
+
+### Minor changes
+
+* Bumps `haven` to minimum package version 2.1.1
+* New package website at https://docs.ropensci.org/essurvey
+
+### Internal
+
+* `read_format_data` now tries to read data using `haven` but falls backs to `foreign` in case there's an error. This should only work for SDDF data [#38].
+* `read_format_data` and `read_sddf_data` now always return a list. Checking the length of data to return a data frame now happens within each `import_*` function.
+
+### Bug fixes
+
+* Removes an unnecessary if statement in `set_email` that didn't allow to overwrite the email once set.
 
 ## essurvey 1.0.2
 
 ### Minor changes
 
-`show_country_rounds` checks if there are missing values and excludes them.
+* `show_country_rounds` checks if there are missing values and excludes them.
 
 ### Breaking changes
 
@@ -54,7 +76,7 @@ replacements of `ess_rounds` and `ess_all_rounds`. Same changes were repeated fo
 
 * `ess_email` had no default value but now has `NULL` as default [#23]
 
-* The `format` argument is now checked through `match.arg` rathern than manual check [#25]
+* The `format` argument is now checked through `match.arg` rather than manual check [#25]
 
 ## ess 0.1.1 (2018-03-05)
 
