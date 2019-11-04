@@ -1,7 +1,7 @@
-6926f5d4ff93176acf3b07248354b591 *DESCRIPTION
+a25041da82e421cf157fea5ec7e25eb0 *DESCRIPTION
 3007a1d1b700edf8739c5c17adfe6770 *LICENSE
 368718dc321781e99d79410eae138d40 *NAMESPACE
-912e94cdcf35086183f35ec6546bdd5e *NEWS.md
+04dca37b8e063fd1d7b86c58634c9908 *NEWS.md
 6fbab704c600ee21f3616a665d5e398e *R/check_args.R
 5b7343cc0a4a76734df61dcf79435a9b *R/download_format.R
 29896e861a3439465a952c2ca06cde24 *R/essurvey-package.R
@@ -13,7 +13,7 @@ e1b15b8efa9810a8d790f43888a0e00d *R/import_sddf_country.R
 b2fad51ce7d27d34cfb572e47a6dcb0f *R/set_email.R
 0d248038bdd4a2773cb8bc546b91a812 *R/show_any_rounds.R
 4fa6a7335734016c8fb52a263608c8ec *R/show_funs.R
-d0e5101c84071f25e9f7e56d8c28108f *R/show_sddf_cntrounds.R
+0c2a8893640e3310acab12de29526efa *R/show_sddf_cntrounds.R
 3b0b0de94362b84646ab3ae5d7b6bbd1 *R/url_funs.R
 780dda7a97661316fc2f8e2616e4edca *R/utils.R
 82decbdca4394bfc5688aa3b7d07e9d2 *README.md
@@ -21,7 +21,7 @@ d0e5101c84071f25e9f7e56d8c28108f *R/show_sddf_cntrounds.R
 b8f04ec8914f0fdc2a33c62beae14d32 *inst/CITATION
 20f20ac3ed536f3e4c4b4d4a00606352 *inst/doc/intro_ess.R
 03a23799be8cc90c612092d834365365 *inst/doc/intro_ess.Rmd
-27e5a475a621d2e291bb1d8ef250f718 *inst/doc/intro_ess.html
+8c0caabb8de66d850eb5c556e8b82d92 *inst/doc/intro_ess.html
 2076bd73ee22e8e88b64246ebd2f0986 *man/essurvey-package.Rd
 8f6b0b054ae5f2f25da3642b41630d97 *man/figures/ess_logo.png
 c737c81921c2d6568c2435e8af487dd0 *man/import_country.Rd
@@ -37,7 +37,7 @@ e6a4bd16efb19a20532d4e71fa6a1e57 *man/show_sddf_cntrounds.Rd
 766f9693f684781a6e806a78ad04fc05 *man/show_theme_rounds.Rd
 f1ee4ca8a444b3a681f155736d6d6ff5 *man/show_themes.Rd
 08bd57b53b2b41f3950e1994e0bff58b *tests/testthat.R
-e7c76e4a1a91c5e3adbb704f4c0527fe *tests/testthat/test-1-show_.R
+1b7a576aa6821235a6c2f8a15401edf5 *tests/testthat/test-1-show_.R
 fded8708ba6be013531febb171b8125f *tests/testthat/test-2-country.R
 24d6f45eee3fb334b4472b486b1a2306 *tests/testthat/test-3-rounds.R
 dd23e55f802ea434424c809843787274 *tests/testthat/test-4-recode_missings.R
