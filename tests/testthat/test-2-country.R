@@ -1,10 +1,10 @@
-    # Environment variables from Travis CI
+# Environment variables from Travis CI
 
 ess_email <- Sys.getenv("ess_email")
 
-skip_cran <- skip_on_cran()
+run_long_tests <- identical("true", Sys.getenv("NOT_CRAN"))
 
-if (skip_cran) {
+if (run_long_tests) {
 
   # Test for only one round
   round_one <- import_rounds(1, ess_email)
@@ -106,6 +106,7 @@ check_downloaded_rounds <- function(x,
 }
 
 test_that("import_country checks for args", {
+  skip_on_cran()
 
   expect_error(import_country(numeric()),
                regexp = "is.character(country) is not TRUE",
@@ -123,6 +124,7 @@ test_that("import_country checks for args", {
 
 
 test_that("download_country checks for args", {
+  skip_on_cran()
 
   expect_error(download_country(numeric()),
                regexp = "is.character(country) is not TRUE",
@@ -206,6 +208,7 @@ test_that("Test that downloading files is working fine", {
                  "All files saved to")
 
   check_downloaded_rounds(downloads, 1, c(".dta", ".do"))  
+
 })
 
 # TODO: output_dir could be checked earlier
@@ -218,6 +221,7 @@ test_that("output_dir should be valid", {
                                 1,
                                 ess_email,
                                 output_dir = NULL))
+
 })
 
 test_that("import_country files with other non-stata format", {
@@ -240,6 +244,7 @@ test_that("Specify 'sas' for reading ess data throws error", {
 
 
 test_that("import_sddf_country checks for args", {
+  skip_on_cran()
 
   expect_error(import_sddf_country(numeric()),
                regexp = "is.character(country) is not TRUE",
@@ -292,9 +297,12 @@ test_that("import_sddf_country for one/many rounds from rounds 1:4", {
 
   many_waves <- import_sddf_country("Slovenia", 1:4, ess_email)
   check_all_rounds(many_waves, 1:4, "SI")
+
 })
 
 test_that("foreign installation is checked", {
+  skip_on_cran()
+
   # See https://community.rstudio.com/t/how-can-i-make-testthat-think-i-dont-have-a-package-installed/33441/3 #nolintr
   with_mock(
     "essurvey:::is_foreign_installed" = function() FALSE,
@@ -302,6 +310,7 @@ test_that("foreign installation is checked", {
                  "Package `foreign` is needed to read some SDDF data. Please install with install.packages(\"foreign\")", #nolintr
                  fixed = TRUE) 
   )
+
 })
 
 if (is_foreign_installed()) {
@@ -359,10 +368,12 @@ test_that("import_sddf_country for all rounds of a country", {
   # I had the same test repeated for other countries
   # but it takes too much time to run the tests
   test_all_rounds("Spain", country_lookup["Spain"])
+
 })
 
 
 test_that("download_sddf_country checks for args", {
+  skip_on_cran()
 
   expect_error(download_sddf_country(numeric()),
                regexp = "is.character(country) is not TRUE",
@@ -383,18 +394,20 @@ test_that("download_sddf_country checks for args", {
 # with the other downloads. I leave it here because it is used
 # in this test and in the next and some of the tests above
 # delete the tempdir (I think), deleting the downloaded files.
-available_rounds <- show_sddf_cntrounds("Spain")
+if (run_long_tests) {
+  available_rounds <- show_sddf_cntrounds("Spain")
 
-# Test if downloads all data for Spain and subsets correctly
-# Test for when format is NULL which moves through 'stata', 'spss', and 'spss'
-expect_message(downloads_spain <-
-                 download_sddf_country("Spain",
-                                       available_rounds,
-                                       ess_email,
-                                       output_dir = tempdir(),
-                                       format = NULL
-                                       ),
-               "All files saved to")
+  # Test if downloads all data for Spain and subsets correctly
+  # Test for when format is NULL which moves through 'stata', 'spss', and 'spss'
+  expect_message(downloads_spain <-
+                   download_sddf_country("Spain",
+                                         available_rounds,
+                                         ess_email,
+                                         output_dir = tempdir(),
+                                         format = NULL
+                                         ),
+                 "All files saved to")
+}
 
 
 test_that("Test that downloading files is working for sddf data", {
@@ -463,4 +476,5 @@ test_that("Test that downloading all rounds is working for sddf data", {
   })
 
   expect_true(all(country_abbrv == country_lookup["Spain"]))
+
 })
