@@ -8,7 +8,7 @@ Status](https://travis-ci.org/ropensci/essurvey.svg?branch=master)](https://trav
 status](https://ci.appveyor.com/api/projects/status/github/ropensci/essurvey?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/essurvey)
 [![Coverage
 status](https://codecov.io/gh/ropensci/essurvey/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/essurvey?branch=master)
-[![rOpensci\_Badge](https://badges.ropensci.org/201_status.svg)](https://github.com/ropensci/onboarding/issues/201)
+[![rOpensci\_Badge](https://badges.ropensci.org/201_status.svg)](https://github.com/ropensci/software-review/issues/201)
 
 ## Description
 
@@ -31,26 +31,8 @@ possible. It has a few helper functions to download rounds (a term
 synonym to waves to denote the same survey in different time points),
 rounds for a selected country and to show which rounds/countries are
 available. Check out the vignette and other documentation in the
-[package’s website](https://ropensci.github.io/essurvey/) for more
+[package’s website](https://docs.ropensci.org/essurvey/) for more
 detailed examples of the `essurvey` package.
-
-## Citation
-
-    #> 
-    #> To cite essurvey in publications use:
-    #> 
-    #>   Cimentada, Jorge (2019). Download Data from the European Social
-    #>   Survey on the Fly R package version 1.0.3
-    #> 
-    #> A BibTeX entry for LaTeX users is
-    #> 
-    #>   @Manual{,
-    #>     title = {Download Data from the European Social Survey on the Fly},
-    #>     author = {Jorge Cimentada},
-    #>     year = {2019},
-    #>     note = {R package version 1.0.3},
-    #>     url = {https://docs.ropensci.org/essurvey/},
-    #>   }
 
 ## Installation
 
@@ -86,9 +68,6 @@ To explore which rounds/countries are present in the ESS use the
 
 ``` r
 library(essurvey)
-#> 
-#> Please cite as:
-#> Cimentada, Jorge (2019). Download Data from the European Social Survey on the Fly R package version 1.0.2.
 show_countries()
 #>  [1] "Albania"            "Austria"            "Belgium"           
 #>  [4] "Bulgaria"           "Croatia"            "Cyprus"            
@@ -186,7 +165,7 @@ R with the `haven` package for all `essurvey` related functions to work.
 -----
 
 Please note that this project is released with a [Contributor Code of
-Conduct](https://ropensci.github.io/essurvey/CONDUCT.html). By
+Conduct](https://docs.ropensci.org/essurvey/CONDUCT.html). By
 participating in this project you agree to abide by its terms.
 
 [![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
