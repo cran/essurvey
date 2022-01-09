@@ -6,8 +6,6 @@
 #' should work fine. Make sure your email is registered at
 #' \url{http://www.europeansocialsurvey.org/} before setting the email.
 #'
-#' @return Nothing. Executed to have the side effect of setting the env var.
-#'
 #' @export
 #'
 #' @examples

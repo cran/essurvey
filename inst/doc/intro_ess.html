@@ -29,22 +29,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
-  }
-});
-</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -56,11 +40,19 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -355,16 +347,16 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h2>Downloading country specific rounds</h2>
 <p>Note: versions less than and including <code>essurvey 1.0.1</code> returned wrong countries. Please install the latest CRAN/Github version.</p>
 <p>To install and load development version of the package use:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ropensci/essurvey&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ropensci/essurvey&quot;</span>)</span></code></pre></div>
 <p>to install the stable version from CRAN use:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;essurvey&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;essurvey&quot;</span>)</span></code></pre></div>
 <p>Downloading the ESS data requires validating your email every time you download data. We can set our email as an environment variable with <code>set_email</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">set_email</span>(<span class="st">&quot;your@email.com&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_email</span>(<span class="st">&quot;your@email.com&quot;</span>)</span></code></pre></div>
 <p>Once that’s executed you can delete the previous line and any <code>import_*</code> call will look for the email automatically, stored as an environment variable.</p>
 <p>Let’s suppose you don’t know which countries or rounds are available for the ESS. Then the <code>show_*</code> family of functions is your friend.</p>
 <p>To find out which countries have participated you can use <code>show_countries()</code></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">show_countries</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_countries</span>()</span></code></pre></div>
 <pre><code>##  [1] &quot;Albania&quot;            &quot;Austria&quot;            &quot;Belgium&quot;           
 ##  [4] &quot;Bulgaria&quot;           &quot;Croatia&quot;            &quot;Cyprus&quot;            
 ##  [7] &quot;Czechia&quot;            &quot;Denmark&quot;            &quot;Estonia&quot;           
@@ -379,58 +371,58 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## [34] &quot;Sweden&quot;             &quot;Switzerland&quot;        &quot;Turkey&quot;            
 ## [37] &quot;Ukraine&quot;            &quot;United Kingdom&quot;</code></pre>
 <p>This function actually looks up the countries in the ESS website. If new countries enter, this will automatically grab those countries as well. Let’s check out Turkey. How many rounds has Turkey participated in? We can use <code>show_country_rounds()</code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>tk_rnds &lt;-<span class="st"> </span><span class="kw">show_country_rounds</span>(<span class="st">&quot;Turkey&quot;</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a>tk_rnds</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tk_rnds <span class="ot">&lt;-</span> <span class="fu">show_country_rounds</span>(<span class="st">&quot;Turkey&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tk_rnds</span></code></pre></div>
 <pre><code>## [1] 2 4</code></pre>
 <p>Note that country names are case sensitive. Use the exact name printed out by <code>show_countries()</code></p>
 <p>Using this information, we can download those specific rounds easily with <code>import_country</code>. Since <code>essurvey 1.0.0</code> all <code>ess_*</code> functions have been deprecated in favor of the <code>import_*</code> and <code>download_*</code> functions.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>turkey &lt;-</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">import_country</span>(</span>
-<span id="cb8-3"><a href="#cb8-3"></a>    <span class="dt">country =</span> <span class="st">&quot;Turkey&quot;</span>,</span>
-<span id="cb8-4"><a href="#cb8-4"></a>    <span class="dt">rounds =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)</span>
-<span id="cb8-5"><a href="#cb8-5"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>turkey <span class="ot">&lt;-</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">import_country</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="st">&quot;Turkey&quot;</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">rounds =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <p><code>turkey</code> will now be a list of <code>length(rounds)</code> containing a data frame for each round. If you only specified one round, then all <code>import_*</code> functions return a data frame. <code>import_country</code> is useful for when you want to download specific rounds, but not all. To download all rounds for a country automatically you can use <code>import_all_cntrounds</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">import_all_cntrounds</span>(<span class="st">&quot;Turkey&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">import_all_cntrounds</span>(<span class="st">&quot;Turkey&quot;</span>)</span></code></pre></div>
 <p>The <code>import_*</code> family is concerned with downloading the data and thus always returns a list containing data frames unless only one round is specified, in which it returns a <code>tibble</code>. Conversely, the <code>show_*</code> family grabs information from the ESS website and always returns vectors.</p>
 </div>
 <div id="download-complete-rounds" class="section level2">
 <h2>Download complete rounds</h2>
 <p>Similarly, we can use other functions to download rounds. To see which rounds are currently available, use <code>show_rounds</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">show_rounds</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_rounds</span>()</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
 <p>Similar to <code>show_countries</code>, <code>show_rounds</code> interactively looks up rounds in the ESS website, so any future rounds will automatically be included.</p>
 <p>To download all available rounds, use <code>import_all_rounds</code></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>all_rounds &lt;-<span class="st"> </span><span class="kw">import_all_rounds</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>all_rounds <span class="ot">&lt;-</span> <span class="fu">import_all_rounds</span>()</span></code></pre></div>
 <p>Alternatively, use <code>import_rounds</code> for selected ones.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>selected_rounds &lt;-<span class="st"> </span><span class="kw">import_rounds</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>selected_rounds <span class="ot">&lt;-</span> <span class="fu">import_rounds</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>))</span></code></pre></div>
 </div>
 <div id="downloading-data-for-stata-spss-and-sas-users" class="section level2">
 <h2>Downloading data for Stata, SPSS and SAS users</h2>
 <p>All <code>import_*</code> functions have an equivalent <code>download_*</code> function that allows the user to save the datasets in a specified folder in <code>&#39;stata&#39;</code>, <code>&#39;spss&#39;</code> or <code>&#39;sas&#39;</code> formats.</p>
 <p>For example, to save round two from Turkey in a folder called <code>./my_folder</code>, we use:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">download_country</span>(<span class="st">&quot;Turkey&quot;</span>, <span class="dv">2</span>,</span>
-<span id="cb14-2"><a href="#cb14-2"></a>                 <span class="dt">output_dir =</span> <span class="st">&quot;./myfolder/&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download_country</span>(<span class="st">&quot;Turkey&quot;</span>, <span class="dv">2</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">output_dir =</span> <span class="st">&quot;./myfolder/&quot;</span>)</span></code></pre></div>
 <p>By default it saves the data as <code>&#39;stata&#39;</code> files. Alternatively you can use <code>&#39;spss&#39;</code> or <code>&#39;sas&#39;</code>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">download_country</span>(<span class="st">&quot;Turkey&quot;</span>, <span class="dv">2</span>,</span>
-<span id="cb15-2"><a href="#cb15-2"></a>                 <span class="dt">output_dir =</span> <span class="st">&quot;./myfolder/&quot;</span>,</span>
-<span id="cb15-3"><a href="#cb15-3"></a>                 <span class="dt">format =</span> <span class="st">&#39;sas&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download_country</span>(<span class="st">&quot;Turkey&quot;</span>, <span class="dv">2</span>,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">output_dir =</span> <span class="st">&quot;./myfolder/&quot;</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">format =</span> <span class="st">&#39;sas&#39;</span>)</span></code></pre></div>
 <p>This will save the data to <code>./myfolder/ESS_Turkey</code> and inside that folder there will be the <code>ESS2</code> folder that contains the data.</p>
 </div>
 <div id="correcting-for-missing-values" class="section level2">
 <h2>Correcting for missing values</h2>
 <p>Whenever you download the ESS data, it comes together with a script that recodes the values 6 = ‘Not applicable’, 7 = ‘Refusal’, 8 = ‘Don’t know’, 9 = ‘No answer’ and 9 = ‘Not available’ as missings. However, that is the case for variables that have a scaling of 1-5. For variables which have a scaling from 1-10 the corresponding missings are 66, 77, and so on. At first glance new users might not know this and start calculating statistics with these variables such as…</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>sp &lt;-<span class="st"> </span><span class="kw">import_country</span>(<span class="st">&quot;Spain&quot;</span>, <span class="dv">1</span>)</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">mean</span>(sp<span class="op">$</span>tvtot)</span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># 4.622406</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">import_country</span>(<span class="st">&quot;Spain&quot;</span>, <span class="dv">1</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sp<span class="sc">$</span>tvtot)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 4.622406</span></span></code></pre></div>
 <p>..but that vector contains numbers such as <code>66</code>, <code>77</code>, that shouldn’t be there. <code>recode_missings()</code> removes the corresponding missings for numeric variables as well as for character variables. It accepts the complete <code>tibble</code> and recodes all variables that should be recoded.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>new_coding &lt;-<span class="st"> </span><span class="kw">recode_missings</span>(sp)</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">mean</span>(new_coding<span class="op">$</span>tvtot, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co"># 4.527504</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>new_coding <span class="ot">&lt;-</span> <span class="fu">recode_missings</span>(sp)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(new_coding<span class="sc">$</span>tvtot, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 4.527504</span></span></code></pre></div>
 <p>It also gives you the option of recoding only specific categories. For example…</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>other_newcoding &lt;-<span class="st"> </span><span class="kw">recode_missings</span>(sp, <span class="kw">c</span>(<span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Refusal&quot;</span>))</span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">table</span>(other_newcoding<span class="op">$</span>tvpol)</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="co">#  0   1   2   3   4   5   6   7  66 </span></span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="co"># 167 460 610 252  95  36  26  31  45 </span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>other_newcoding <span class="ot">&lt;-</span> <span class="fu">recode_missings</span>(sp, <span class="fu">c</span>(<span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Refusal&quot;</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(other_newcoding<span class="sc">$</span>tvpol)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  0   1   2   3   4   5   6   7  66 </span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 167 460 610 252  95  36  26  31  45 </span></span></code></pre></div>
 <p>…still has missing values but recoded the ones that were specified. I strongly suggest the user not to recode these categories as missing without looking at the data as there might be substantial differences between people who didn’t and who did answer questions. If the user is decided to do so, use <code>recode_missings</code> to recode everything and the corresponding <code>recode_*_missings</code> functions for numeric and character recodings separately. See the documentation of <code>?recode_missings</code> for more information.</p>
 </div>
 <div id="analyzing-ess-data" class="section level2">

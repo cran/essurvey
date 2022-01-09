@@ -9,9 +9,6 @@ set_email(ess_email)
 \arguments{
 \item{ess_email}{a character string with your registered email.}
 }
-\value{
-Nothing. Executed to have the side effect of setting the env var.
-}
 \description{
 Save your ESS email as an environment variable
 }

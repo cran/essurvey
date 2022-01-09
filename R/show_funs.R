@@ -8,20 +8,20 @@
 #' \dontrun{
 #' show_rounds()
 #' }
-#'
-#'
+#' 
+#' 
 show_rounds <- function() {
   incomplete_links <- get_rounds_link(.global_vars$ess_website)
-
+  
   # extract ESS* part to detect dupliacted
   ess_prefix <- sort(string_extract(incomplete_links,
                                     "ESS[[:digit:]]"))
-
-
+                     
+  
   # extract only the digit
   unique_rounds_available <- unique(string_extract(ess_prefix,
                                                    "[[:digit:]]"))
-
+                       
   as.numeric(unique_rounds_available)
 }
 
@@ -36,14 +36,14 @@ show_rounds <- function() {
 #' \dontrun{
 #' show_countries()
 #' }
-#'
-#'
+#' 
+#' 
 show_countries <- function() {
   show_any(.global_vars$ess_website, .global_vars$country_index)
 }
 
 #' Return available themes in the European Social Survey
-#'
+#' 
 #' This function returns the available themes in the European Social Survey.
 #' However, contrary to \code{\link{show_countries}} and \code{\link{show_country_rounds}},
 #' themes can not be downloaded as separate datasets. This and
@@ -53,11 +53,11 @@ show_countries <- function() {
 #' @export
 #'
 #' @examples
-#'
+#' 
 #' \dontrun{
 #' show_themes()
 #' }
-#'
+#' 
 show_themes <- function() {
   show_any(.global_vars$ess_website, .global_vars$theme_index)
 }
@@ -66,7 +66,7 @@ show_themes <- function() {
 # General function to show_* any index.
 
 show_any <- function(ess_website, module_index) { # nocov start
-
+  
   module_table <- table_to_list(ess_website, module_index)
 
   names(module_table)
@@ -120,10 +120,10 @@ country_lookup <- c(Afghanistan = "AF",
                     Algeria = "DZ",
                     `American Samoa` = "AS",
                     Andorra = "AD",
-                    Angola = "AO",
+                    Angola = "AO", 
                     Anguilla = "AI",
                     Antarctica = "AQ",
-                    `Antigua & Barbuda` = "AG",
+                    `Antigua & Barbuda` = "AG", 
                     Argentina = "AR",
                     Armenia = "AM",
                     Aruba = "AW",
@@ -139,7 +139,7 @@ country_lookup <- c(Afghanistan = "AF",
                     Bavaria = NA,
                     Belarus = "BY",
                     Belgium = "BE",
-                    Belize = "BZ",
+                    Belize = "BZ", 
                     Benin = "BJ",
                     Bermuda = "BM",
                     Bhutan = "BT",
